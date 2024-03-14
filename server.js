@@ -4,6 +4,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+const authRoutes = require('./routes/authRoutes.js');
+
 const PORT = process.env.PORT || process.env.API_PORT;
 
 const app = express();
@@ -11,6 +13,9 @@ const app = express();
 //middleware
 app.use(express.json());
 app.use(cors());
+
+// register the routes
+app.use('/api/auth', authRoutes);
 
 const server = http.createServer(app);
 
