@@ -18,17 +18,22 @@ const postRegister = async (req, res) => {
         const user = await User.create({
             username,
             mail: mail.toLowerCase(),
-            password: encryptedPassword,
+            password: encryptedPassword
         });
+
+        // create JWT token
+        // const token = "JWT TOKEN";
 
         // sending response to client
         res.status(201).json({
             userDetails: {
-                mail: uawe.mail,
+                mail: user.mail,
+                // token: token,
                 username: user.username,
             }
         })
-    } catch {
+
+    } catch (err) {
         return res.status(500).send("Error occured. Please try again");
     }
 }
